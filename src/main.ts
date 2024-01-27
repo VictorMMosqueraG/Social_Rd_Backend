@@ -19,24 +19,23 @@ async function bootstrap() {
 
   app.enableCors();
 
-
-  const globalPrefix = process.env.PREFIX + (process.env.VERSION ? '/' + process.env.VERSION : '');
+  const globalPrefix = process.env.PREFIX + (process.env.VERSION ? '' + process.env.VERSION : '');
 
   app.setGlobalPrefix(globalPrefix);
-  console.log('globalPrefix:', globalPrefix);
   
   app.useGlobalPipes(new ValidationPipe({whitelist: true,forbidNonWhitelisted: true,}));
 
-  const config = new DocumentBuilder().setTitle('Social_RD')
+  console.log
+  const config = new DocumentBuilder()
+  .setTitle('Social_RD')
   .setDescription('The Social_RD API')
   .setVersion('1.0')
   .build();
-
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(globalPrefix, app, document);
 
-  const port = process.env.PORT || 3000;
-  const host_api =`http://${process.env.HOST}:${port}/${globalPrefix}` || `http://${process.env.HOST}:3000`;
+  const port = process.env.PORT || 3005;
+  const host_api =`http://${process.env.HOST}:${port}/${globalPrefix}` || `http://${process.env.HOST}:3005`;
 
   await app.listen(port);
   Logger.log(`🚀 Application is running on: ${host_api}`);
