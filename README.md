@@ -116,6 +116,23 @@ docker stop "container-name"
 brew install mysql
 ```
 
+- It is possible that when connecting to the db there is an authentication error or something similar, if this is the case, enter the container db through the terminal, log in with the db password and put the following command inside:
+
+```
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'MySecretPassword';
+FLUSH PRIVILEGES;
+```
+
+- You should get a message like this to know if you successfully carried out the command:
+
+```
+mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'MySecretPassword';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.01 sec)
+```
+
 ## API documentation
 
 we gonna use swagger, in this link:
