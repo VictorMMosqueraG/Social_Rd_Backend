@@ -1,16 +1,16 @@
 import { IUser } from "src/common/libs";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class User implements IUser{
+@Index("unique_email_constraint", ["email"], { unique: true })
+export class User implements IUser {
 
     @PrimaryGeneratedColumn('uuid')
-    id:string
+    id: string;
 
-    @Column('varchar',{length:100,nullable:false,unique:true})
+    @Column('varchar', { length: 100, nullable: false })
     email: string;
   
-    @Column('varchar',{length:60,nullable:false})
+    @Column('varchar', { length: 60, nullable: false })
     password: string;
 }
